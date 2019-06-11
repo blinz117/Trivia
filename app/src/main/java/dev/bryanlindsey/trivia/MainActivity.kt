@@ -1,6 +1,7 @@
 package dev.bryanlindsey.trivia
 
 import android.os.Bundle
+import android.text.Html
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
@@ -24,19 +25,19 @@ class MainActivity : AppCompatActivity() {
                     val triviaView = layoutInflater.inflate(R.layout.trivia_question, questionItemContainer, false)
 
                     val questionText = triviaView.findViewById<TextView>(R.id.questionText)
-                    questionText.text = question.question
+                    questionText.text = Html.fromHtml(question.question)
 
                     val answerGroup = triviaView.findViewById<RadioGroup>(R.id.answersGroup)
                     answerGroup.addView(
                         RadioButton(this).apply {
-                            text = question.correct_answer
+                            text = Html.fromHtml(question.correct_answer)
                         }
                     )
 
                     for (incorrectAnswer in question.incorrect_answers) {
                         answerGroup.addView(
                             RadioButton(this).apply {
-                                text = incorrectAnswer
+                                text = Html.fromHtml(incorrectAnswer)
                             }
                         )
                     }

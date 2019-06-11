@@ -1,26 +1,26 @@
 package dev.bryanlindsey.trivia
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel : TriviaQuestionDisplayViewModel by viewModels()
+    private val triviaQuestionDisplayViewModel : TriviaQuestionDisplayViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel.triviaQuestionsLiveData.observe(
+        triviaQuestionDisplayViewModel.triviaQuestionsLiveData.observe(
             this,
             Observer {
                 triviaQuestionDisplayText.text = it
             }
         )
 
-        viewModel.getMoreTriviaQuestions()
+        triviaQuestionDisplayViewModel.getMoreTriviaQuestions()
     }
 }

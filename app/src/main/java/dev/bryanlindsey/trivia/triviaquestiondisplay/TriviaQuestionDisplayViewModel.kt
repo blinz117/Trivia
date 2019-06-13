@@ -1,4 +1,4 @@
-package dev.bryanlindsey.trivia
+package dev.bryanlindsey.trivia.triviaquestiondisplay
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

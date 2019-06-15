@@ -59,6 +59,8 @@ class TriviaQuestionDisplayFragmentTest {
 
         launchFragmentInContainer<TriviaQuestionDisplayFragment>()
 
+        waitForNetworkResponse()
+
         onView(ViewMatchers.withId(R.id.triviaQuestionCard)).check(ViewAssertions.doesNotExist())
     }
 
@@ -90,10 +92,16 @@ class TriviaQuestionDisplayFragmentTest {
 
         launchFragmentInContainer<TriviaQuestionDisplayFragment>()
 
+        waitForNetworkResponse()
+
         onView(withText("This is a test question")).check(matches(isDisplayed()))
         onView(withText("Correct Answer")).check(matches(isDisplayed()))
         onView(withText("Incorrect Answer 1")).check(matches(isDisplayed()))
         onView(withText("Incorrect Answer 2")).check(matches(isDisplayed()))
         onView(withText("Incorrect Answer 3")).check(matches(isDisplayed()))
+    }
+
+    private fun waitForNetworkResponse() {
+        mockServer.takeRequest()
     }
 }

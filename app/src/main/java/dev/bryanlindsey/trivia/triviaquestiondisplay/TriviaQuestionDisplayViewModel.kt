@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import dev.bryanlindsey.trivia.remote.response.TriviaApiResponse
 import dev.bryanlindsey.trivia.remote.service.TriviaService
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class TriviaQuestionDisplayViewModel(private val triviaService: TriviaService) : ViewModel() {
 
@@ -16,11 +15,9 @@ class TriviaQuestionDisplayViewModel(private val triviaService: TriviaService) :
     var triviaQuestionsLiveData: LiveData<TriviaApiResponse> = _triviaQuestionsLiveData
 
     fun getMoreTriviaQuestions() =
-            viewModelScope.launch {
-                runBlocking {
-                    val response = triviaService.getTriviaQuestions(10)
+        viewModelScope.launch {
+            val response = triviaService.getTriviaQuestions(10)
 
-                    _triviaQuestionsLiveData.postValue(response)
-                }
-            }
+            _triviaQuestionsLiveData.value = response
+        }
 }

@@ -18,7 +18,8 @@
             android:id="@+id/questionText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_marginBottom="8dp"
             tools:text="@tools:sample/lorem" />
 
         <RadioGroup

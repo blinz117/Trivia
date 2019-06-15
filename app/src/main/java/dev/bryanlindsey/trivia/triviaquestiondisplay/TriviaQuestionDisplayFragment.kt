@@ -5,11 +5,13 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import dev.bryanlindsey.trivia.R
 import dev.bryanlindsey.trivia.remote.response.TriviaApiResponse
 import kotlinx.android.synthetic.main.trivia_questions_fragment.*
@@ -58,5 +60,12 @@ class TriviaQuestionDisplayFragment: Fragment() {
 
             questionItemContainer.addView(triviaView)
         }
+
+        questionItemContainer.addView(
+            Button(context).apply {
+                text = "Submit"
+                setOnClickListener(Navigation.createNavigateOnClickListener(R.id.submit_answers))
+            }
+        )
     }
 }

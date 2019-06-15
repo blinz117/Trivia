@@ -2,10 +2,13 @@ package dev.bryanlindsey.trivia.triviaquestiondisplay
 
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.runner.AndroidJUnit4
+import dev.bryanlindsey.trivia.R
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
@@ -39,6 +42,24 @@ class TriviaQuestionDisplayFragmentTest {
     @After
     fun tearDown() {
         mockServer.shutdown()
+    }
+
+    @Test
+    fun emptyResponse_showsNoQuestions() {
+        mockServer.enqueue(
+            MockResponse().setBody(
+                """
+                {
+                    "response_code": 0,
+                    "results": []
+                }
+                """.trimIndent()
+            )
+        )
+
+        launchFragmentInContainer<TriviaQuestionDisplayFragment>()
+
+        onView(ViewMatchers.withId(R.id.triviaQuestionCard)).check(ViewAssertions.doesNotExist())
     }
 
     @Test

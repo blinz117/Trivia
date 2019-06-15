@@ -2,16 +2,23 @@ package dev.bryanlindsey.trivia.remote
 
 import dev.bryanlindsey.trivia.remote.service.BASE_URL
 import dev.bryanlindsey.trivia.remote.service.TriviaService
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-private val retrofit = Retrofit.Builder()
-    .baseUrl(BASE_URL)
-    .addConverterFactory(MoshiConverterFactory.create())
-    .build()
+const val BASE_URL_DI_INSTANCE_NAME = "baseUrl"
 
 val networkModule = module {
 
-    single { retrofit.create(TriviaService::class.java) }
+    single<String>(named(BASE_URL_DI_INSTANCE_NAME)) { BASE_URL }
+
+    single<Retrofit> {
+        Retrofit.Builder()
+            .baseUrl(get<String>(named("baseUrl")))
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+    }
+
+    single { get<Retrofit>().create(TriviaService::class.java) }
 }

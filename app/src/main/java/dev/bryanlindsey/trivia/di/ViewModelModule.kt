@@ -1,4 +1,4 @@
-package dev.bryanlindsey.trivia
+package dev.bryanlindsey.trivia.di
 
 import dev.bryanlindsey.trivia.triviaquestiondisplay.TriviaQuestionDisplayViewModel
 import org.koin.android.viewmodel.dsl.viewModel

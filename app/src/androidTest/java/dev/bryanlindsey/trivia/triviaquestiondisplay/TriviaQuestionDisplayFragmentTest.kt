@@ -29,12 +29,11 @@ class TriviaQuestionDisplayFragmentTest {
     fun setUp() {
         mockServer.start()
 
-        val mockServerUrl = mockServer.url("")
-
+        val mockServerUrl = mockServer.url("").toString()
         loadKoinModules(
             module {
-                    mockServerUrl.toString()
                 single(named(BASE_URL_DI_INSTANCE_NAME), override = true) {
+                    mockServerUrl
                 }
             }
         )

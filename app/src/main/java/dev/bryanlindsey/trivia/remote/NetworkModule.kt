@@ -7,9 +7,11 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
+const val BASE_URL_DI_INSTANCE_NAME = "baseUrl"
+
 val networkModule = module {
 
-    single<String>(named("baseUrl")) { BASE_URL }
+    single<String>(named(BASE_URL_DI_INSTANCE_NAME)) { BASE_URL }
 
     single<Retrofit> {
         Retrofit.Builder()

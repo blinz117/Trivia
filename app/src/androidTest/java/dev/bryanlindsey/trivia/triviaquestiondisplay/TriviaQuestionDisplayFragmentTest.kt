@@ -9,6 +9,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import dev.bryanlindsey.trivia.R
+import dev.bryanlindsey.trivia.remote.BASE_URL_DI_INSTANCE_NAME
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
@@ -32,8 +33,8 @@ class TriviaQuestionDisplayFragmentTest {
 
         loadKoinModules(
             module {
-                single(named("baseUrl"), override = true) {
                     mockServerUrl.toString()
+                single(named(BASE_URL_DI_INSTANCE_NAME), override = true) {
                 }
             }
         )

@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation_graph"
-    app:startDestination="@id/triviaQuestionDisplayFragment">
+    app:startDestination="@id/welcomeFragment">
 
     <fragment
         android:id="@+id/triviaQuestionDisplayFragment"
         android:name="dev.bryanlindsey.trivia.triviaquestiondisplay.TriviaQuestionDisplayFragment"
         android:label="TriviaQuestionDisplayFragment" />
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="dev.bryanlindsey.trivia.welcome.WelcomeFragment"
+        android:label="WelcomeFragment" >
+        <action
+            android:id="@+id/start_trivia"
+            app:destination="@id/triviaQuestionDisplayFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
 </navigation>

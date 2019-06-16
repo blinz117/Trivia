@@ -68,6 +68,7 @@ dependencies {
     debugImplementation "com.willowtreeapps.hyperion:hyperion-geiger-counter:$hyperionVersion"
     debugImplementation 'pl.droidsonroids.foqa:deviceinfo:0.0.10'
 
+    implementation 'com.google.firebase:firebase-core:16.0.9'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.ext:junit:1.0.0'
@@ -77,3 +78,5 @@ dependencies {
 
     androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.12.0'
 }
+
+apply plugin: 'com.google.gms.google-services'

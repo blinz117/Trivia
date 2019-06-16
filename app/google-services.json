@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "541620295311",
+    "firebase_url": "https://trivia-20b31.firebaseio.com",
+    "project_id": "trivia-20b31",
+    "storage_bucket": "trivia-20b31.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541620295311:android:99722ea6476517f2",
+        "android_client_info": {
+          "package_name": "dev.bryanlindsey.trivia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "541620295311-v3466m6dg4rd93qdr83rl24ann48pq22.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGKPnn4xm0x3ab25EmoY7zZs7k8xUfnlU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "541620295311-v3466m6dg4rd93qdr83rl24ann48pq22.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

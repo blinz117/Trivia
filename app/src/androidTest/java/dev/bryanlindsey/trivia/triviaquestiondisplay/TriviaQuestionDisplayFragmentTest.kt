@@ -101,6 +101,39 @@ class TriviaQuestionDisplayFragmentTest {
         onView(withText("Incorrect Answer 3")).check(matches(isDisplayed()))
     }
 
+    @Test
+    fun responseWithQuestion_showsSubmitButton() {
+        mockServer.enqueue(
+            MockResponse().setBody(
+                """
+                {
+                    "response_code": 0,
+                    "results": [
+                        {
+                            "category": "Test",
+                            "type": "multiple",
+                            "difficulty": "easy",
+                            "question": "This is a test question",
+                            "correct_answer": "Correct Answer",
+                            "incorrect_answers": [
+                                "Incorrect Answer 1",
+                                "Incorrect Answer 2",
+                                "Incorrect Answer 3"
+                            ]
+                        }
+                    ]
+                }
+                """.trimIndent()
+            )
+        )
+
+        launchFragmentInContainer<TriviaQuestionDisplayFragment>()
+
+        waitForNetworkResponse()
+
+        onView(withText("Submit")).check(matches(isDisplayed()))
+    }
+
     private fun waitForNetworkResponse() {
         mockServer.takeRequest()
     }

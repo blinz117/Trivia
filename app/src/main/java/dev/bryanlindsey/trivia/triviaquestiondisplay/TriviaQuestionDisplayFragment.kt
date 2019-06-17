@@ -2,9 +2,7 @@ package dev.bryanlindsey.trivia.triviaquestiondisplay
 
 import android.os.Bundle
 import android.text.Html
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -17,13 +15,9 @@ import dev.bryanlindsey.trivia.remote.response.TriviaApiResponse
 import kotlinx.android.synthetic.main.trivia_questions_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class TriviaQuestionDisplayFragment: Fragment() {
+class TriviaQuestionDisplayFragment: Fragment(R.layout.trivia_questions_fragment) {
 
     private val triviaQuestionDisplayViewModel: TriviaQuestionDisplayViewModel by viewModel()
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.trivia_questions_fragment, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         triviaQuestionDisplayViewModel.triviaQuestionsLiveData.observe(

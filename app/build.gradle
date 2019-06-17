@@ -8,6 +8,10 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+androidGitVersion {
+    format "%tag%%-branch%%-count%%-dirty%"
+}
+
 android {
     compileSdkVersion 28
     defaultConfig {

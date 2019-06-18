@@ -1,8 +1,16 @@
+plugins {
+    id 'com.gladed.androidgitversion' version '0.4.9'
+}
+
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
+
+androidGitVersion {
+    format "%tag%%-branch%%-count%%-dirty%"
+}
 
 android {
     compileSdkVersion 28
@@ -10,8 +18,10 @@ android {
         applicationId "dev.bryanlindsey.trivia"
         minSdkVersion 23
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+
+        versionName androidGitVersion.name()
+        versionCode androidGitVersion.code()
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
     }

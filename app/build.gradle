@@ -9,6 +9,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 androidGitVersion {
     format "%tag%%-branch%%-count%%-dirty%"
 }

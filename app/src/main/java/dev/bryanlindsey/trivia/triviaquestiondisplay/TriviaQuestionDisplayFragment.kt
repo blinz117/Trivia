@@ -58,7 +58,12 @@ class TriviaQuestionDisplayFragment: Fragment(R.layout.trivia_questions_fragment
         questionItemContainer.addView(
             Button(context).apply {
                 text = "Submit"
-                setOnClickListener(Navigation.createNavigateOnClickListener(R.id.submit_answers))
+
+                setOnClickListener(
+                    Navigation.createNavigateOnClickListener(
+                        TriviaQuestionDisplayFragmentDirections.submitAnswers(7,10)
+                    )
+                )
             }
         )
     }

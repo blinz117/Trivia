@@ -17,7 +17,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 private const val CORRECT_ANSWER_TAG = "correct answer"
 
-class TriviaQuestionDisplayFragment: Fragment(R.layout.trivia_questions_fragment) {
+class TriviaQuestionDisplayFragment : Fragment(R.layout.trivia_questions_fragment) {
 
     private val triviaQuestionDisplayViewModel: TriviaQuestionDisplayViewModel by viewModel()
 

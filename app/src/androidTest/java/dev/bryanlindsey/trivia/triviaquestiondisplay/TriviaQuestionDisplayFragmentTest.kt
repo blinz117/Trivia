@@ -8,12 +8,14 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import dev.bryanlindsey.trivia.OkHttpIdlingResourceRule
 import dev.bryanlindsey.trivia.R
 import dev.bryanlindsey.trivia.remote.BASE_URL_DI_INSTANCE_NAME
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.core.context.loadKoinModules
@@ -22,6 +24,9 @@ import org.koin.dsl.module
 
 @RunWith(AndroidJUnit4::class)
 class TriviaQuestionDisplayFragmentTest {
+
+    @get:Rule
+    var rule = OkHttpIdlingResourceRule()
 
     private val mockServer = MockWebServer()
 
@@ -59,8 +64,6 @@ class TriviaQuestionDisplayFragmentTest {
 
         launchFragmentInContainer<TriviaQuestionDisplayFragment>()
 
-        waitForNetworkResponse()
-
         onView(ViewMatchers.withId(R.id.triviaQuestionCard)).check(ViewAssertions.doesNotExist())
     }
 
@@ -91,8 +94,6 @@ class TriviaQuestionDisplayFragmentTest {
         )
 
         launchFragmentInContainer<TriviaQuestionDisplayFragment>()
-
-        waitForNetworkResponse()
 
         onView(withText("This is a test question")).check(matches(isDisplayed()))
         onView(withText("Correct Answer")).check(matches(isDisplayed()))
@@ -129,12 +130,6 @@ class TriviaQuestionDisplayFragmentTest {
 
         launchFragmentInContainer<TriviaQuestionDisplayFragment>()
 
-        waitForNetworkResponse()
-
         onView(withText("Submit")).check(matches(isDisplayed()))
-    }
-
-    private fun waitForNetworkResponse() {
-        mockServer.takeRequest()
     }
 }

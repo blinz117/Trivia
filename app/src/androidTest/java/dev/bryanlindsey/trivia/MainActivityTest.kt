@@ -13,6 +13,7 @@ import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.core.context.loadKoinModules
@@ -21,6 +22,9 @@ import org.koin.dsl.module
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
+
+    @get:Rule
+    var rule = OkHttpIdlingResourceRule()
 
     private val mockServer = MockWebServer()
 
@@ -106,6 +110,8 @@ class MainActivityTest {
     }
 
     private fun startTrivia() {
+        queueQuestionResponse()
+
         onView(withId(R.id.startButton)).perform(click())
     }
 
@@ -114,13 +120,9 @@ class MainActivityTest {
     }
 
     private fun navigateToResultsScreen() {
-        queueQuestionResponse()
-
         ActivityScenario.launch(MainActivity::class.java)
 
         startTrivia()
-
-        waitForNetworkResponse()
 
         submitAnswers()
     }
@@ -136,9 +138,5 @@ class MainActivityTest {
                 """.trimIndent()
             )
         )
-    }
-
-    private fun waitForNetworkResponse() {
-        mockServer.takeRequest()
     }
 }

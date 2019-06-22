@@ -38,5 +38,11 @@
             app:destination="@id/triviaQuestionDisplayFragment"
             app:popUpTo="@+id/welcomeFragment"
             app:popUpToInclusive="false" />
+        <argument
+            android:name="pointsScored"
+            app:argType="integer" />
+        <argument
+            android:name="pointsPossible"
+            app:argType="integer" />
     </fragment>
 </navigation>

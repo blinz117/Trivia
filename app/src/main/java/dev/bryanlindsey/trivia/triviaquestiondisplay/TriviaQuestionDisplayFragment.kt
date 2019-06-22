@@ -9,15 +9,19 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import dev.bryanlindsey.trivia.R
 import dev.bryanlindsey.trivia.remote.response.TriviaApiResponse
 import kotlinx.android.synthetic.main.trivia_questions_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
+private const val CORRECT_ANSWER_TAG = "correct answer"
+
 class TriviaQuestionDisplayFragment: Fragment(R.layout.trivia_questions_fragment) {
 
     private val triviaQuestionDisplayViewModel: TriviaQuestionDisplayViewModel by viewModel()
+
+    private val answerSets = mutableListOf<RadioGroup>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         triviaQuestionDisplayViewModel.triviaQuestionsLiveData.observe(
@@ -41,6 +45,7 @@ class TriviaQuestionDisplayFragment: Fragment(R.layout.trivia_questions_fragment
             answerGroup.addView(
                 RadioButton(context).apply {
                     text = Html.fromHtml(question.correct_answer)
+                    tag = CORRECT_ANSWER_TAG
                 }
             )
 
@@ -52,14 +57,34 @@ class TriviaQuestionDisplayFragment: Fragment(R.layout.trivia_questions_fragment
                 )
             }
 
+            answerSets.add(answerGroup)
+
             questionItemContainer.addView(triviaView)
         }
 
         questionItemContainer.addView(
             Button(context).apply {
                 text = "Submit"
-                setOnClickListener(Navigation.createNavigateOnClickListener(R.id.submit_answers))
+
+                setOnClickListener {
+                    val score = calculateScore()
+                    val possiblePoints = answerSets.size
+                    val action = TriviaQuestionDisplayFragmentDirections.submitAnswers(score, possiblePoints)
+                    findNavController().navigate(action)
+                }
+
             }
         )
+    }
+
+    private fun calculateScore() =
+        answerSets
+            .map { isAnswerCorrect(it) }
+            .count { it }
+
+    private fun isAnswerCorrect(answerSet: RadioGroup): Boolean {
+        val checkedAnswerId = answerSet.checkedRadioButtonId
+        val checkedView: View? = answerSet.findViewById(checkedAnswerId)
+        return checkedView?.tag == CORRECT_ANSWER_TAG
     }
 }

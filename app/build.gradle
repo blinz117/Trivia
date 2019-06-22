@@ -94,7 +94,11 @@ dependencies {
 
 detekt {
     filters = ".*/resources/.*,.*/build/.*"
+
+    // As of RC15, this value doesn't work yet. It works on latest master, but a build hasn't been publicly released yet
     ignoreFailures = true
+    
+    config = files("default-detekt-config.yml")
 }
 
 apply plugin: 'com.google.gms.google-services'

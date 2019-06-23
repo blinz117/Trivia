@@ -14,7 +14,7 @@ val networkModule = module {
 
     single<String>(named(BASE_URL_DI_INSTANCE_NAME)) { BASE_URL }
 
-    single{ OkHttpClient() }
+    single { OkHttpClient() }
 
     single<Retrofit> {
         Retrofit.Builder()

@@ -8,6 +8,8 @@ import dev.bryanlindsey.trivia.remote.response.TriviaApiResponse
 import dev.bryanlindsey.trivia.remote.service.TriviaService
 import kotlinx.coroutines.launch
 
+private const val DEFAULT_QUESTION_COUNT = 10
+
 class TriviaQuestionDisplayViewModel(private val triviaService: TriviaService) : ViewModel() {
 
     private val _triviaQuestionsLiveData = MutableLiveData<TriviaApiResponse>()
@@ -16,7 +18,7 @@ class TriviaQuestionDisplayViewModel(private val triviaService: TriviaService) :
 
     fun getMoreTriviaQuestions() =
         viewModelScope.launch {
-            val response = triviaService.getTriviaQuestions(10)
+            val response = triviaService.getTriviaQuestions(DEFAULT_QUESTION_COUNT)
 
             _triviaQuestionsLiveData.value = response
         }

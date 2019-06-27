@@ -13,6 +13,7 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 
 androidGitVersion {
     format "%tag%%-branch%%-count%%-dirty%"
+    baseCode 1
 }
 
 android {

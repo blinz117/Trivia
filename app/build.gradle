@@ -39,6 +39,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    jacoco {
+        version = "0.8.4"
+    }
+
     testOptions {
         execution 'ANDROIDX_TEST_ORCHESTRATOR'
     }

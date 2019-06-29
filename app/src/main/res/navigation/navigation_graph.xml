@@ -45,4 +45,8 @@
             android:name="pointsPossible"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="dev.bryanlindsey.trivia.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

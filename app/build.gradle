@@ -129,7 +129,7 @@ detekt {
 /**
  * Adapted from https://medium.com/@rafael_toledo/unified-code-coverage-for-android-revisited-44789c9b722f
  */
-task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+task jacocoTestReport(type: JacocoReport) {
     group = "Reporting"
     description = "Generate Jacoco coverage reports for Debug build"
 

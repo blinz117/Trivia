@@ -16,6 +16,10 @@ class TriviaQuestionDisplayViewModel(private val triviaService: TriviaService) :
 
     var triviaQuestionsLiveData: LiveData<TriviaApiResponse> = _triviaQuestionsLiveData
 
+    init {
+        getMoreTriviaQuestions()
+    }
+
     fun getMoreTriviaQuestions() =
         viewModelScope.launch {
             val response = triviaService.getTriviaQuestions(DEFAULT_QUESTION_COUNT)

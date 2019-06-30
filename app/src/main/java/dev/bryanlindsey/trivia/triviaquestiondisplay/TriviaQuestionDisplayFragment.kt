@@ -30,8 +30,6 @@ class TriviaQuestionDisplayFragment : Fragment(R.layout.trivia_questions_fragmen
                 render(it)
             }
         )
-
-        triviaQuestionDisplayViewModel.getMoreTriviaQuestions()
     }
 
     private fun render(data: TriviaApiResponse) {

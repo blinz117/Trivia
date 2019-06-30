@@ -163,7 +163,7 @@ task jacocoTestReport(type: JacocoReport) {
             android.sourceSets.main.java.srcDirs,
             "$project.projectDir/src/main/java"
     ])
-    executionData = fileTree(dir: project.buildDir, includes: ['jacoco/testDebugUnitTest.exec'])
+    executionData = fileTree(dir: project.buildDir, includes: ['jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*.ec'])
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
+import dev.bryanlindsey.trivia.DEFAULT_DARK_MODE_SETTING
 
 class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -16,6 +17,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             key = "theme"
             title = "Dark mode"
             summary = "Enable dark mode"
+            setDefaultValue(DEFAULT_DARK_MODE_SETTING)
         }
 
         themePreference.onPreferenceChangeListener =

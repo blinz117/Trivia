@@ -166,4 +166,20 @@ task jacocoTestReport(type: JacocoReport) {
     executionData = fileTree(dir: project.buildDir, includes: ['jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*.ec'])
 }
 
+configurations { codacy }
+dependencies {
+    codacy 'com.github.codacy:codacy-coverage-reporter:-SNAPSHOT'
+}
+task sendCoverageToCodacy(type: JavaExec, dependsOn: jacocoTestReport) {
+    main = "com.codacy.CodacyCoverageReporter"
+    classpath = configurations.codacy
+    args = [
+            "report",
+            "-l",
+            "Kotlin",
+            "-r",
+            "${buildDir}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml"
+    ]
+}
+
 apply plugin: 'com.google.gms.google-services'

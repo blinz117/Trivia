@@ -146,8 +146,13 @@ task jacocoTestReport(type: JacocoReport) {
             '**/Manifest*.*',
             '**/*Test*.*',
             'android/**/*.*',
+            // Koin stuff
             '**/di/*',
-            '**/*FragmentDirections*.*'
+            '**/*inject*.*',
+            // Navigation stuff
+            '**/*FragmentDirections*.*',
+            '**/*FragmentArgs*.*',
+            '**/*nav*.*'
     ]
     // generated classes
     classDirectories = fileTree(

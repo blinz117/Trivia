@@ -145,7 +145,9 @@ task jacocoTestReport(type: JacocoReport) {
             '**/BuildConfig.*',
             '**/Manifest*.*',
             '**/*Test*.*',
-            'android/**/*.*'
+            'android/**/*.*',
+            '**/di/*',
+            '**/*FragmentDirections*.*'
     ]
     // generated classes
     classDirectories = fileTree(

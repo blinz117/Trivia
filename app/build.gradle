@@ -146,8 +146,13 @@ task jacocoTestReport(type: JacocoReport) {
             '**/Manifest*.*',
             '**/*Test*.*',
             'android/**/*.*',
-            '**/*Fragment.*',
-            '**/*Activity.*'
+            // Koin stuff
+            '**/di/*',
+            '**/*inject*.*',
+            // Navigation stuff
+            '**/*FragmentDirections*.*',
+            '**/*FragmentArgs*.*',
+            '**/*nav*.*'
     ]
     // generated classes
     classDirectories = fileTree(
@@ -159,10 +164,7 @@ task jacocoTestReport(type: JacocoReport) {
     )
 
     // sources
-    sourceDirectories = files([
-            android.sourceSets.main.java.srcDirs,
-            "$project.projectDir/src/main/java"
-    ])
+    sourceDirectories = files(["$project.projectDir/src/main/java"])
     executionData = fileTree(dir: project.buildDir, includes: ['jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*.ec'])
 }
 

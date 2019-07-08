@@ -1,10 +1,10 @@
 package dev.bryanlindsey.trivia
 
 import android.app.Application
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
-import androidx.preference.PreferenceManager
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import dev.bryanlindsey.trivia.di.androidModule
@@ -19,16 +19,23 @@ const val DEFAULT_DARK_MODE_SETTING = true
 
 class TriviaApplication : Application() {
 
+    private val preferences: SharedPreferences by inject()
+
     private val firebaseRemoteConfig: FirebaseRemoteConfig by inject()
 
     override fun onCreate() {
         super.onCreate()
 
-        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+        setUpDi()
+
         val isDarkModeEnabled = preferences.getBoolean("theme", DEFAULT_DARK_MODE_SETTING)
         val nightModeFlag = if (isDarkModeEnabled) MODE_NIGHT_YES else MODE_NIGHT_NO
         AppCompatDelegate.setDefaultNightMode(nightModeFlag)
 
+        setUpFirebase()
+    }
+
+    private fun setUpDi() {
         startKoin {
             androidContext(this@TriviaApplication)
             modules(
@@ -40,8 +47,6 @@ class TriviaApplication : Application() {
                 )
             )
         }
-
-        setUpFirebase()
     }
 
     private fun setUpFirebase() {

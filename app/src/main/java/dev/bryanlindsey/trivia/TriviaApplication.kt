@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.preference.PreferenceManager
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
+import dev.bryanlindsey.trivia.di.androidModule
 import dev.bryanlindsey.trivia.di.firebaseModule
 import dev.bryanlindsey.trivia.di.viewModelModule
 import dev.bryanlindsey.trivia.remote.networkModule
@@ -32,6 +33,7 @@ class TriviaApplication : Application() {
             androidContext(this@TriviaApplication)
             modules(
                 listOf(
+                    androidModule,
                     networkModule,
                     viewModelModule,
                     firebaseModule

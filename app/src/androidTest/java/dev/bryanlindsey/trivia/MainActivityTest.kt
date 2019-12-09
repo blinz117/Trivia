@@ -8,17 +8,12 @@ import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import dev.bryanlindsey.trivia.remote.BASE_URL_DI_INSTANCE_NAME
-import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.core.context.loadKoinModules
-import org.koin.core.qualifier.named
-import org.koin.dsl.module
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
@@ -30,21 +25,12 @@ class MainActivityTest {
 
     @Before
     fun setUp() {
-        mockServer.start()
-
-        val mockServerUrl = mockServer.url("").toString()
-        loadKoinModules(
-            module {
-                single(named(BASE_URL_DI_INSTANCE_NAME), override = true) {
-                    mockServerUrl
-                }
-            }
-        )
+        MockServerTestUtils.initializeMockServer(mockServer)
     }
 
     @After
     fun tearDown() {
-        mockServer.shutdown()
+        MockServerTestUtils.tearDownMockServer(mockServer)
     }
 
     @Test
@@ -128,15 +114,6 @@ class MainActivityTest {
     }
 
     private fun queueQuestionResponse() {
-        mockServer.enqueue(
-            MockResponse().setBody(
-                """
-                {
-                    "response_code": 0,
-                    "results": []
-                }
-                """.trimIndent()
-            )
-        )
+        MockServerTestUtils.setUpEmptyResponse(mockServer)
     }
 }

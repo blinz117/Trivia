@@ -21,6 +21,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class TriviaQuestionDisplayFragmentTest {
 
+    // region Server Mocking Setup
     @get:Rule
     var rule = OkHttpIdlingResourceRule()
 
@@ -35,6 +36,7 @@ class TriviaQuestionDisplayFragmentTest {
     fun tearDown() {
         MockServerTestUtils.tearDownMockServer(mockServer)
     }
+    // endregion
 
     @Test
     fun emptyResponse_showsNoQuestions() {

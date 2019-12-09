@@ -18,6 +18,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
 
+    // region Server Mocking Setup
     @get:Rule
     var rule = OkHttpIdlingResourceRule()
 
@@ -32,6 +33,7 @@ class MainActivityTest {
     fun tearDown() {
         MockServerTestUtils.tearDownMockServer(mockServer)
     }
+    // endregion
 
     @Test
     fun userStartsOnWelcomeScreen() {

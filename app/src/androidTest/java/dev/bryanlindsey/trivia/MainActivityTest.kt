@@ -62,8 +62,7 @@ class MainActivityTest {
     fun userStartsTriviaThenSubmitsAnswers_showsResultsScreen() {
        navigateToResultsScreen()
 
-        onView(withId(R.id.questionItemContainer)).check(doesNotExist())
-        onView(withId(R.id.resultsPrompt)).check(matches(isDisplayed()))
+        assertIsOnResultScreen()
     }
 
     @Test
@@ -95,8 +94,22 @@ class MainActivityTest {
         onView(withId(R.id.questionItemContainer)).check(matches(withId(R.id.questionItemContainer)))
     }
 
+    @Test
+    fun givenUserOnResultsScreen_whenActivityIsRecreated_remainsOnResultsScreen() {
+        navigateToResultsScreen()
+
+        scenario.recreate()
+
+        assertIsOnResultScreen()
+    }
+
     private fun assertIsOnWelcomeScreen() {
         onView(withId(R.id.welcomeText)).check(matches(isDisplayed()))
+    }
+
+    private fun assertIsOnResultScreen() {
+        onView(withId(R.id.questionItemContainer)).check(doesNotExist())
+        onView(withId(R.id.resultsPrompt)).check(matches(isDisplayed()))
     }
 
     private fun startTrivia() {

@@ -18,6 +18,8 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
 
+    private lateinit var scenario: ActivityScenario<MainActivity>
+
     // region Server Mocking Setup
     @get:Rule
     var rule = OkHttpIdlingResourceRule()
@@ -37,14 +39,14 @@ class MainActivityTest {
 
     @Test
     fun userStartsOnWelcomeScreen() {
-        ActivityScenario.launch(MainActivity::class.java)
+        launchActivity()
 
         assertIsOnWelcomeScreen()
     }
 
     @Test
     fun userStartsTrivia_hitsBackButton_returnsToWelcomeScreen() {
-        ActivityScenario.launch(MainActivity::class.java)
+        launchActivity()
 
         startTrivia()
 
@@ -108,11 +110,15 @@ class MainActivityTest {
     }
 
     private fun navigateToResultsScreen() {
-        ActivityScenario.launch(MainActivity::class.java)
+        launchActivity()
 
         startTrivia()
 
         submitAnswers()
+    }
+
+    private fun launchActivity() {
+        scenario = ActivityScenario.launch(MainActivity::class.java)
     }
 
     private fun queueQuestionResponse() {

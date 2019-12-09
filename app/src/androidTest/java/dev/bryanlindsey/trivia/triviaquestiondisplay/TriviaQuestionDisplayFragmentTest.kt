@@ -68,4 +68,25 @@ class TriviaQuestionDisplayFragmentTest {
 
         onView(withText("Submit")).check(matches(isDisplayed()))
     }
+
+    @Test
+    fun givenResponseWithQuestion_whenFragmentIsRecreated_questionStillDisplays() {
+        MockServerTestUtils.setUpSuccessfulResponse(mockServer)
+
+        val scenario = launchFragmentInContainer<TriviaQuestionDisplayFragment>()
+
+        onView(withText("This is a test question")).check(matches(isDisplayed()))
+        onView(withText("Correct Answer")).check(matches(isDisplayed()))
+        onView(withText("Incorrect Answer 1")).check(matches(isDisplayed()))
+        onView(withText("Incorrect Answer 2")).check(matches(isDisplayed()))
+        onView(withText("Incorrect Answer 3")).check(matches(isDisplayed()))
+
+        scenario.recreate()
+
+        onView(withText("This is a test question")).check(matches(isDisplayed()))
+        onView(withText("Correct Answer")).check(matches(isDisplayed()))
+        onView(withText("Incorrect Answer 1")).check(matches(isDisplayed()))
+        onView(withText("Incorrect Answer 2")).check(matches(isDisplayed()))
+        onView(withText("Incorrect Answer 3")).check(matches(isDisplayed()))
+    }
 }
